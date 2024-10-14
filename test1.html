@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista De Tareas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #task-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        #task-input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #add-btn {
+            padding: 10px 15px;
+            background-color: #5cb85c;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #add-btn:hover {
+            background-color: #4cae4c;
+        }
+        .task {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .task input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div id="task-container">
+        <h1>Lista De Tareas</h1>
+        <div>
+            <input type="text" id="task-input" placeholder="Añadir tarea..." />
+            <button id="add-btn">Añadir</button>
+        </div>
+        <div id="task-list"></div>
+    </div>
+
+    <script>
+        document.getElementById('add-btn').addEventListener('click', function() {
+            const taskInput = document.getElementById('task-input');
+            const taskText = taskInput.value.trim();
+            
+            if (taskText) {
+                const taskList = document.getElementById('task-list');
+                const taskDiv = document.createElement('div');
+                taskDiv.className = 'task';
+                
+                const taskCheckbox = document.createElement('input');
+                taskCheckbox.type = 'checkbox';
+                taskCheckbox.addEventListener('change', function() {
+                    taskTextElement.classList.toggle('completed', this.checked);
+                });
+                
+                const taskTextElement = document.createElement('span');
+                taskTextElement.textContent = taskText;
+                
+                taskDiv.appendChild(taskCheckbox);
+                taskDiv.appendChild(taskTextElement);
+                taskList.appendChild(taskDiv);
+                
+                taskInput.value = ''; // Clear input
+            }
+        });
+    </script>
+</body>
+</html>
